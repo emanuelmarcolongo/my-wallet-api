@@ -3,10 +3,11 @@ import { MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv";
 import cors from "cors";
 import joi from "joi";
-import bcrypt from "bcrypt";
-import { v4 as uuidV4 } from 'uuid';
 
-import { newDeposit, newWithdraw, postSignIn, postSignUp, userHistory } from "./controllers/usersController.js";
+
+import  {postSignIn, postSignUp} from "./controllers/usersController.js";
+import { newDeposit, newWithdraw, userHistory } from "./controllers/transactionsController.js";
+
 
 
 const app = express();
@@ -57,6 +58,8 @@ app.post("/deposit", newDeposit);
 app.post("/withdraw", newWithdraw);
 
 app.get("/history", userHistory);
+
+
 
 const port = 5000;
 app.listen(port, () => console.log(`Server running in port: ${port}`));
