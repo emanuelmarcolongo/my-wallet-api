@@ -1,7 +1,7 @@
 import { signupSchema, usersCollection } from "../app.js";
+import bcrypt from "bcrypt";
 
-
-export async function postUser (req, res) {
+export async function postSignUp (req, res) {
 
     const user = req.body;
 
@@ -33,4 +33,8 @@ export async function postUser (req, res) {
     } catch (err) {
         return res.sendStatus(500)
     }
+}
+
+export async function postSignIn (req, res) {
+
 }

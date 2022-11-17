@@ -6,7 +6,7 @@ import joi from "joi";
 import bcrypt from "bcrypt";
 import { v4 as uuidV4 } from 'uuid';
 
-import { postUser } from "./controllers/usersController.js";
+import { postSignUp } from "./controllers/usersController.js";
 
 const app = express();
 dotenv.config();
@@ -35,7 +35,7 @@ export const transactionsCollection = db.collection("transactions");
 
 // ROTAS:
 
-app.post("/sign-up", postUser);
+app.post("/sign-up", postSignUp);
 
 const port = 5000;
 app.listen(port, () => console.log(`Server running in port: ${port}`));
