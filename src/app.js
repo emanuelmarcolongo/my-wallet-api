@@ -6,7 +6,8 @@ import joi from "joi";
 import bcrypt from "bcrypt";
 import { v4 as uuidV4 } from 'uuid';
 
-import { postSignIn, postSignUp } from "./controllers/usersController.js";
+import { newDeposit, newWithdraw, postSignIn, postSignUp } from "./controllers/usersController.js";
+
 
 const app = express();
 dotenv.config();
@@ -24,6 +25,12 @@ export const signinSchema = joi.object({
     email: joi.string().email().required(),
     password: joi.string().required()
 })
+
+export const depositSchema = joi.object({
+    value: joi.number().required().min(1),
+    description: joi.string()
+})
+
 
 const mongoClient = new MongoClient(process.env.MONGO_URI);
 let db;
@@ -44,6 +51,10 @@ export const sessionCollection = db.collection("sessions");
 app.post("/sign-up", postSignUp);
 
 app.post("/sign-in", postSignIn);
+
+app.post("/deposit", newDeposit);
+
+app.post("/withdraw", newWithdraw);
 
 const port = 5000;
 app.listen(port, () => console.log(`Server running in port: ${port}`));
