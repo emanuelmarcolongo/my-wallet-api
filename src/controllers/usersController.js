@@ -154,3 +154,22 @@ export async function newWithdraw (req, res) {
    
     res.status(200).send(token)
 }
+
+export async function userHistory (req, res) {
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+        res.status(401).send("Headers authorization inválido")
+    }
+
+    const token = authorization.replace("Bearer ", "");
+
+    const user = await sessionCollection.findOne({token: token})
+    if (!user) {
+        return res.status(401).send("Token inválido")
+    }
+
+    const userTransactions = await transactionsCollection.find({token: token}).toArray()
+   
+    res.status(200).send([...userTransactions].reverse());
+}
