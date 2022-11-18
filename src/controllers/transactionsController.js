@@ -8,17 +8,6 @@ export async function newDeposit (req, res) {
     const { authorization } = req.headers;
     const { value, description} = req.body;
 
-    if (!authorization) {
-        res.status(401).send("Headers authorization inválido")
-    }
-
-    const validation = depositSchema.validate(req.body, {abortEarly: false});
-
-    if(validation.error) {
-        const errors = validation.error.details.map((i) => i.message);
-        return res.status(422).send(errors);
-    }
-
     const token = authorization.replace("Bearer ", "");
 
     const user = await sessionCollection.findOne({token: token})
@@ -43,17 +32,6 @@ export async function newDeposit (req, res) {
 export async function newWithdraw (req, res) {
     const { authorization } = req.headers;
     const { value, description} = req.body;
-
-    if (!authorization) {
-        res.status(401).send("Headers authorization inválido")
-    }
-
-    const validation = depositSchema.validate(req.body, {abortEarly: false});
-
-    if(validation.error) {
-        const errors = validation.error.details.map((i) => i.message);
-        return res.status(422).send(errors);
-    }
 
     const token = authorization.replace("Bearer ", "");
 

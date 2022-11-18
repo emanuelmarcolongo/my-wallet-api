@@ -1,7 +1,6 @@
 import express from "express"
 import { postSignIn, postSignUp } from "../controllers/usersController.js";
 import { signInValidate, signUpValidate } from "../middlewares/validationMiddleware.js";
-// import { postSignIn, postSignUp } from "../controllers/usersController";
 
 
 const userRouter = express.Router();

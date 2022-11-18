@@ -35,7 +35,6 @@ export async function signInValidate(req, res, next) {
 
 export async function depositValidate(req, res, next) {
     const { authorization } = req.headers;
-    const { value, description} = req.body;
 
     if (!authorization) {
         res.status(401).send("Headers authorization inválido")
@@ -49,6 +48,7 @@ export async function depositValidate(req, res, next) {
     }
 
     next();
+
 }
 
 export async function headersAuthorizationValidate (req, res, next) {

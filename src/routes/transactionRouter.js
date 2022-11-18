@@ -1,12 +1,13 @@
 import express from "express";
 import { newDeposit, newWithdraw, userHistory } from "../controllers/transactionsController.js";
+import { depositValidate } from "../middlewares/validationMiddleware.js";
 
 
 const router = express.Router();
 
-router.post("/deposit",  newDeposit);
+router.post("/deposit",  depositValidate , newDeposit);
 
-router.post("/withdraw", newWithdraw);
+router.post("/withdraw", depositValidate, newWithdraw);
 
 router.get("/history", userHistory);
 
