@@ -1,6 +1,7 @@
-import { sessionCollection, signinSchema, signupSchema, usersCollection } from "../app.js";
+import { sessionCollection,  usersCollection } from "../app.js";
 import bcrypt from "bcrypt";
 import { v4 as uuidV4 } from 'uuid';
+import { signinSchema, signupSchema } from "./schemas/validationSchemas.js";
 
 
 export async function postSignUp (req, res) {
@@ -39,6 +40,7 @@ export async function postSignUp (req, res) {
 
 export async function postSignIn (req, res) {
     const user = req.body;
+
 
     const validation = signinSchema.validate(user, {abortEarly: false});
 

@@ -1,5 +1,5 @@
-import { newDeposit, newWithdraw, userHistory } from "../controllers/transactionsController.js";
 import express from "express";
+import { newDeposit, newWithdraw, userHistory } from "../controllers/transactionsController.js";
 
 const router = express.Router();
 

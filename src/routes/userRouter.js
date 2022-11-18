@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"
 import { postSignIn, postSignUp } from "../controllers/usersController";
 
 const router = express.Router();
