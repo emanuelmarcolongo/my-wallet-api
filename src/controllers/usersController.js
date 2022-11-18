@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuidV4 } from 'uuid';
 import { sessionCollection, usersCollection } from "../database/db.js";
 
+
 export async function postSignUp (req, res) {
 
     const user = req.body;
@@ -28,6 +29,7 @@ export async function postSignUp (req, res) {
 
 export async function postSignIn (req, res) {
     const user = req.body;
+    const userInfo = {token: "", name:""}
 
     try {
         const userExists = await usersCollection.findOne ({ email: user.email});
@@ -41,7 +43,9 @@ export async function postSignIn (req, res) {
             const session = await sessionCollection.findOne({userId: userExists._id})
     
             if (session) {
-                return res.status(201).send(session.token);
+                userInfo.token = session.token;
+                userInfo.name = userExists.name;
+                return res.status(201).send(userInfo);
             }
     
             const token = uuidV4();
@@ -50,8 +54,11 @@ export async function postSignIn (req, res) {
                 userId: userExists._id,
                 token
             })
+
+                userInfo.token = token;
+                userInfo.name = userExists.name;
     
-            return res.status(201).send(token);
+            return res.status(201).send(userInfo);
         } else {
             return res.status(401).send("Senha incorreta")
         }
