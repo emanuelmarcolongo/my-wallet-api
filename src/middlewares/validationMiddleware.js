@@ -19,6 +19,20 @@ export async function signUpValidate (req, res, next) {
     next();
 }
 
+export async function signInValidate(req, res, next) {
+    const user = req.body;
+
+
+    const validation = signinSchema.validate(user, {abortEarly: false});
+
+    if(validation.error) {
+        const errors = validation.error.details.map((i) => i.message);
+        return res.status(422).send(errors);
+    }
+
+    next();
+}
+
 export async function depositValidate(req, res, next) {
     const { authorization } = req.headers;
     const { value, description} = req.body;
@@ -46,3 +60,4 @@ export async function headersAuthorizationValidate (req, res, next) {
 
     next();
 }
+
