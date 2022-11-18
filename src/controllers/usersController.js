@@ -3,8 +3,6 @@ import bcrypt from "bcrypt";
 import { v4 as uuidV4 } from 'uuid';
 
 
-
-
 export async function postSignUp (req, res) {
 
     const user = req.body;

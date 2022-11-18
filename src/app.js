@@ -1,12 +1,13 @@
 import express from "express";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient} from "mongodb";
 import dotenv from "dotenv";
 import cors from "cors";
 import joi from "joi";
-
-
 import  {postSignIn, postSignUp} from "./controllers/usersController.js";
 import { newDeposit, newWithdraw, userHistory } from "./controllers/transactionsController.js";
+
+import transactionRouter from "./routes/transactionRouter.js";
+
 
 
 
@@ -14,6 +15,9 @@ const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
+app.use(transactionRouter);
+
+
 
 export const signupSchema = joi.object({
     name: joi.string().required().min(3),
@@ -47,17 +51,10 @@ export const usersCollection = db.collection("users");
 export const transactionsCollection = db.collection("transactions");
 export const sessionCollection = db.collection("sessions");
 
-// ROTAS:
 
 app.post("/sign-up", postSignUp);
 
 app.post("/sign-in", postSignIn);
-
-app.post("/deposit", newDeposit);
-
-app.post("/withdraw", newWithdraw);
-
-app.get("/history", userHistory);
 
 
 
