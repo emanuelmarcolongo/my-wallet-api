@@ -57,10 +57,6 @@ export async function newWithdraw (req, res) {
 export async function userHistory (req, res) {
     const { authorization } = req.headers;
 
-    if (!authorization) {
-        res.status(401).send("Headers authorization inválido")
-    }
-
     const token = authorization.replace("Bearer ", "");
 
     const user = await sessionCollection.findOne({token: token})
