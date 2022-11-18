@@ -1,8 +1,5 @@
 import dayjs from "dayjs";
 import { sessionCollection, transactionsCollection } from "../database/db.js";
-import { signUpValidate } from "../middlewares/validationMiddleware.js";
-import { depositSchema } from "../schemas/validationSchemas.js";
-
 
 export async function newDeposit (req, res) {
     const { authorization } = req.headers;
