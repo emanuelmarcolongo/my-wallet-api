@@ -1,10 +1,13 @@
 import express from "express"
-import { postSignIn, postSignUp } from "../controllers/usersController";
+import { postSignIn, postSignUp } from "../controllers/usersController.js";
+import { signUpValidate } from "../middlewares/validationMiddleware.js";
+// import { postSignIn, postSignUp } from "../controllers/usersController";
 
-const router = express.Router();
 
-router.post("/sign-up", postSignUp);
+const userRouter = express.Router();
 
-router.post("/sign-in", postSignIn);
+userRouter.post("/sign-up",signUpValidate, postSignUp);
 
-export default router;
+userRouter.post("/sign-in", postSignIn);
+
+export default userRouter;

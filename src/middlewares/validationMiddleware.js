@@ -19,7 +19,6 @@ export async function signUpValidate (req, res, next) {
     next();
 }
 
-
 export async function depositValidate(req, res, next) {
     const { authorization } = req.headers;
     const { value, description} = req.body;
