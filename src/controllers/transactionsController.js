@@ -1,6 +1,6 @@
-import {  sessionCollection, transactionsCollection} from "../app.js";
 import dayjs from "dayjs";
-import { depositSchema } from "./schemas/validationSchemas.js";
+import { sessionCollection, transactionsCollection } from "../database/db.js";
+import { depositSchema } from "../schemas/validationSchemas.js";
 
 
 export async function newDeposit (req, res) {
